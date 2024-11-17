@@ -9,13 +9,11 @@ from datetime import datetime
 import time
 import gc
 
-# --- Streamlit интерфейс ---
 st.title("Sprint Health Dashboard with Advanced Metrics")
 default_api_token = 'ATATT3'
 default_api_token += 'xFfGF0MDTSE9LgxG7tCEVBlRXMlEgZgcmQSwzT7UfBeAsXiyqw5Gxwaa8AI70_unSH8zZWnv2ux653kE_F7N6oCQLOfc6nW1mi5fqfKqv5AXS1'
 default_api_token += 've898P8YVx9AV4g-GX1UlFADexbzoolACtsyOeCqO9lykrQJwjlf8mEDUaN4B9ZxgOs=314EC44E'
 
-# Ввод данных пользователя
 jira_base_url = st.text_input("Введите URL вашего Jira пространства(ДЛЯ ЗАПУСКА ДЕМО ОСТАВЬТЕ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ):", "https://funnysemen.atlassian.net")
 api_token = st.text_input("Введите ваш API Token(ДЛЯ ЗАПУСКА ДЕМО ОСТАВЬТЕ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ):", 
                           default_api_token, 
@@ -24,16 +22,13 @@ email = st.text_input("Введите ваш Email для авторизации
 project_key = st.text_input("Введите ключ проекта (например, SCRUM)(ДЛЯ ЗАПУСКА ДЕМО ОСТАВЬТЕ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ):", "SCRUM")
 update_interval = 5
 
-# Проверяем, введены ли все данные
 if not jira_base_url or not api_token or not email or not project_key:
     st.warning("Пожалуйста, заполните все поля для начала работы.")
     st.stop()
 
-# --- Конфигурация Jira ---
 jira_options = {'server': jira_base_url}
 jira = JIRA(options=jira_options, basic_auth=(email, api_token))
 
-# Весовые коэффициенты метрик
 weights = {
     "Engagement": 1.5,
     "Task Quality": 1,
@@ -41,7 +36,6 @@ weights = {
     "Health Score": 1,  # Итоговый скор
 }
 
-# --- Функция для получения данных из Jira ---
 def fetch_data(project_key):
     jql = f'project = {project_key}'
     issues = jira.search_issues(jql, maxResults=100)
@@ -72,11 +66,9 @@ def fetch_data(project_key):
 
     return pd.DataFrame(data)
 
-# --- Подсчёт метрик ---
 def calculate_metrics(df, sprint_duration_weeks):
     total_tasks = len(df)
 
-    # --- Engagement ---
     engagement_submetrics = {
         "Assigned Tasks (%)": len(df[df["Assignee"] != "Unassigned"]) / total_tasks * 100 if total_tasks > 0 else 0,
         "Balanced Task Distribution (%)": 100 - (df["Assignee"].value_counts().std() / total_tasks * 100) if total_tasks > 1 else 100,
@@ -85,7 +77,6 @@ def calculate_metrics(df, sprint_duration_weeks):
     }
     engagement = sum(engagement_submetrics.values()) / len(engagement_submetrics) if engagement_submetrics else 0
 
-    # --- Task Quality ---
     task_quality_submetrics = {
         "Tasks with Descriptions (%)": len(df[df["Description"] == 1]) / total_tasks * 100 if total_tasks > 0 else 0,
         "Tasks with Subtasks (%)": len(df[df["Subtasks"] > 0]) / total_tasks * 100 if total_tasks > 0 else 0,
@@ -93,7 +84,6 @@ def calculate_metrics(df, sprint_duration_weeks):
     }
     task_quality = sum(task_quality_submetrics.values()) / len(task_quality_submetrics) if task_quality_submetrics else 0
 
-    # --- Board Quality ---
     board_quality_submetrics = {
         "Backlog Managed (%)": len(df[df["Status"].str.lower() != "backlog"]) / total_tasks * 100 if total_tasks > 0 else 100,
         "Git Integration Configured (%)": 100 if "git" in df["Summary"].str.lower().values else 0,
@@ -101,7 +91,6 @@ def calculate_metrics(df, sprint_duration_weeks):
     }
     board_quality = sum(board_quality_submetrics.values()) / len(board_quality_submetrics) if board_quality_submetrics else 0
 
-    # --- Итоговый Health Score ---
     health_score = (
         weights["Engagement"] * engagement +
         weights["Task Quality"] * task_quality +
@@ -115,16 +104,14 @@ def calculate_metrics(df, sprint_duration_weeks):
         "Health Score (%)": health_score,
     }
 
-# --- Функция для выбора цвета по значению ---
 def get_color(value):
     if value <= 20:
-        return "#FF0000"  # Красный
+        return "#FF0000"
     elif 21 <= value <= 35:
-        return "#FFA500"  # Желтый
+        return "#FFA500"
     else:
-        return "#4CAF50"  # Зеленый
+        return "#4CAF50"
 
-# --- Визуализация метрик ---
 def render_circular_metrics(metrics, container):
     with container:
         cols = st.columns(len(metrics))
@@ -150,15 +137,14 @@ def render_circular_metrics(metrics, container):
                     plt.close(fig)
                     st.caption(metric)
 
-# --- Основной цикл ---
 if st.button("Запустить анализ"):
-    metrics_container = st.empty()  # Контейнер для обновления метрик
-    backlog_container = st.empty()  # Контейнер для отображения бэклога
+    metrics_container = st.empty()
+    backlog_container = st.empty()
     while True:
         try:
             df = fetch_data(project_key)
             metrics = calculate_metrics(df, 2)
-            render_circular_metrics(metrics, metrics_container)  # Обновляем контейнер с метриками
+            render_circular_metrics(metrics, metrics_container)
             
             with backlog_container:
                 st.subheader("Backlog Overview")
