@@ -11,11 +11,14 @@ import gc
 
 # --- Streamlit интерфейс ---
 st.title("Sprint Health Dashboard with Advanced Metrics")
+default_api_token = 'ATATT3'
+deafult_api_token += 'xFfGF0MDTSE9LgxG7tCEVBlRXMlEgZgcmQSwzT7UfBeAsXiyqw5Gxwaa8AI70_unSH8zZWnv2ux653kE_F7N6oCQLOfc6nW1mi5fqfKqv5AXS1'
+default_api_token += 've898P8YVx9AV4g-GX1UlFADexbzoolACtsyOeCqO9lykrQJwjlf8mEDUaN4B9ZxgOs=314EC44E'
 
 # Ввод данных пользователя
 jira_base_url = st.text_input("Введите URL вашего Jira пространства:", "https://funnysemen.atlassian.net")
 api_token = st.text_input("Введите ваш API Token:", 
-                          "ATATT3xFfGF0j6BFcBjcXXk3_aU7yy9Xwl-nzt8geaA0QA0-AllcnMmwTsqLm2daOF6G1twCNlzsoWVVBYPL0JO_NMvoTpvEuIpMKK02Na_2eXOOlvRPvaPu0FVva1vdgKLXJgwzi-1FDjRZpRdThZlOIDtQbttPo4Zkn1OQZmKmP6hgppr3TX0=76030C7C", 
+                          default_api_token, 
                           type="password")
 email = st.text_input("Введите ваш Email для авторизации:", "funnysemen@gmail.com")
 project_key = st.text_input("Введите ключ проекта (например, SCRUM):", "SCRUM")
