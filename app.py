@@ -16,12 +16,12 @@ default_api_token += 'xFfGF0MDTSE9LgxG7tCEVBlRXMlEgZgcmQSwzT7UfBeAsXiyqw5Gxwaa8A
 default_api_token += 've898P8YVx9AV4g-GX1UlFADexbzoolACtsyOeCqO9lykrQJwjlf8mEDUaN4B9ZxgOs=314EC44E'
 
 # Ввод данных пользователя
-jira_base_url = st.text_input("Введите URL вашего Jira пространства:", "https://funnysemen.atlassian.net")
-api_token = st.text_input("Введите ваш API Token:", 
+jira_base_url = st.text_input("Введите URL вашего Jira пространства(ДЛЯ ЗАПУСКА ДЕМО ОСТАВЬТЕ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ):", "https://funnysemen.atlassian.net")
+api_token = st.text_input("Введите ваш API Token(ДЛЯ ЗАПУСКА ДЕМО ОСТАВЬТЕ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ):", 
                           default_api_token, 
                           type="password")
-email = st.text_input("Введите ваш Email для авторизации:", "funnysemen@gmail.com")
-project_key = st.text_input("Введите ключ проекта (например, SCRUM):", "SCRUM")
+email = st.text_input("Введите ваш Email для авторизации(ДЛЯ ЗАПУСКА ДЕМО ОСТАВЬТЕ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ):", "funnysemen@gmail.com")
+project_key = st.text_input("Введите ключ проекта (например, SCRUM)(ДЛЯ ЗАПУСКА ДЕМО ОСТАВЬТЕ ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ):", "SCRUM")
 update_interval = 5
 
 # Проверяем, введены ли все данные
