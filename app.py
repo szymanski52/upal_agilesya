@@ -15,7 +15,7 @@ st.title("Sprint Health Dashboard with Advanced Metrics")
 # Ввод данных пользователя
 jira_base_url = st.text_input("Введите URL вашего Jira пространства:", "https://funnysemen.atlassian.net")
 api_token = st.text_input("Введите ваш API Token:", 
-                          "ATATT3xFfGF0RNPZpzS4ZkiAIK9BS1D27-YQ9jF63Nb5jebkhfRJnZhnV7bEx2x8uUExRwF6egtwzYoHNr6KrDzkxbnPIEcFswttqREDc6El44FftE6IsHaua4O2pQNhLVgj-BI6aqAsEGo2fRtegSsV-JZdvG-189DvF1acCD6c8UVOA457m5E=ACE2F026", 
+                          "ATATT3xFfGF0j6BFcBjcXXk3_aU7yy9Xwl-nzt8geaA0QA0-AllcnMmwTsqLm2daOF6G1twCNlzsoWVVBYPL0JO_NMvoTpvEuIpMKK02Na_2eXOOlvRPvaPu0FVva1vdgKLXJgwzi-1FDjRZpRdThZlOIDtQbttPo4Zkn1OQZmKmP6hgppr3TX0=76030C7C", 
                           type="password")
 email = st.text_input("Введите ваш Email для авторизации:", "funnysemen@gmail.com")
 project_key = st.text_input("Введите ключ проекта (например, SCRUM):", "SCRUM")
