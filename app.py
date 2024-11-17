@@ -12,7 +12,7 @@ import gc
 # --- Streamlit интерфейс ---
 st.title("Sprint Health Dashboard with Advanced Metrics")
 default_api_token = 'ATATT3'
-deafult_api_token += 'xFfGF0MDTSE9LgxG7tCEVBlRXMlEgZgcmQSwzT7UfBeAsXiyqw5Gxwaa8AI70_unSH8zZWnv2ux653kE_F7N6oCQLOfc6nW1mi5fqfKqv5AXS1'
+default_api_token += 'xFfGF0MDTSE9LgxG7tCEVBlRXMlEgZgcmQSwzT7UfBeAsXiyqw5Gxwaa8AI70_unSH8zZWnv2ux653kE_F7N6oCQLOfc6nW1mi5fqfKqv5AXS1'
 default_api_token += 've898P8YVx9AV4g-GX1UlFADexbzoolACtsyOeCqO9lykrQJwjlf8mEDUaN4B9ZxgOs=314EC44E'
 
 # Ввод данных пользователя
